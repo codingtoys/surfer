@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-namespace codingtoys;
+namespace codingtoys\Surfer;
 
 /**
  * A useful helper function for time calculations
@@ -32,7 +32,7 @@ class Surfer
 
             'cookies' => $this->cookiesJar
         ]);
-        $this->lastPage = Surfer\Page::createFromGuzzleResponse($res, $this);
+        $this->lastPage = \codingtoys\Surfer\Page::createFromGuzzleResponse($res, $this);
 
         // echo $res->getStatusCode();
         // echo $res->getHeaderLine('content-type');
@@ -49,7 +49,7 @@ class Surfer
             'cookies' => $this->cookiesJar
         ]);
 
-        $this->lastPage = Surfer\Page::createFromGuzzleResponse($res, $this);
+        $this->lastPage = \codingtoys\Surfer\Page::createFromGuzzleResponse($res, $this);
 
         return $this->lastPage;
     }
@@ -69,7 +69,7 @@ class Surfer
 
         if ($foundCookie === false) {
 
-            throw new \codingtoys\SurferException('Could not find cookie from cookies jar with name  "'.$name.'" (attention: case-sensitive)', \codingtoys\SurferException::COOKIE_NOT_FOUND);
+            throw new \codingtoys\Surfer\SurferException('Could not find cookie from cookies jar with name  "'.$name.'" (attention: case-sensitive)', \codingtoys\Surfer\SurferException::COOKIE_NOT_FOUND);
         }
 
         return $foundCookie;
