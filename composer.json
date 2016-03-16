@@ -1,0 +1,28 @@
+{
+    "name": "codingtoys/surfer",
+    "description": "Simplified class to simulate web / url surfing and form fillouts. Based on top of guzzle, so it can be extended.",
+    "keywords": ["http", "curl", "php", "client", "network", "utilities", "web", "surfer", "library"],
+    "homepage": "https://github.com/codingtoys/surfer",
+    "version": "1.0",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Richard Jung",
+            "email": "richard@coding.toys",
+            "homepage": "http://coding.toys/richard"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+        "cagartner/phpquery": "*",
+        "guzzlehttp/guzzle": "*"
+    },
+    "autoload": {
+
+        "psr-4": {
+
+            "codingtoys\\surfer\\": ""
+        }
+    }
+}
