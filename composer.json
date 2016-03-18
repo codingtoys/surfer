@@ -16,7 +16,7 @@
     "require": {
 
         "cagartner/phpquery": "*",
-        "guzzlehttp/guzzle": "*"
+        "guzzle/guzzle": "*"
     },
     "autoload": {
 

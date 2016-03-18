@@ -23,7 +23,7 @@ class Form
     public $action;
     public $surfer;
 
-    private _isFilledOut = false;
+    private $_isFilledOut = false;
 
     public function __construct(\PhpQuery\PhpQueryObject $formQueryObject) {
 

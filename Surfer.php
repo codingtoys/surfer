@@ -8,6 +8,8 @@
 
 namespace codingtoys\Surfer;
 
+use Guzzle\Http\Client;
+
 /**
  * A useful helper function for time calculations
  *
@@ -23,16 +25,22 @@ class Surfer
     public function __construct()
     {
         $this->cookiesJar = new \GuzzleHttp\Cookie\CookieJar;
-        $this->client = new \GuzzleHttp\Client();
+        $this->client = new Client([
+
+            'cookies' => $this->cookiesJar
+        ]);
     }
 
     public function open($url)
     {
-        $res = $this->client->request('GET', $url, [
+        $request = $this->client->createRequest('GET', $url);
 
-            'cookies' => $this->cookiesJar
-        ]);
-        $this->lastPage = \codingtoys\Surfer\Page::createFromGuzzleResponse($res, $this);
+        $history = new Guzzle\Plugin\History\HistoryPlugin();
+        $request->addSubscriber($history);
+
+        $response = $this->client->send($request);
+
+        $this->lastPage = \codingtoys\Surfer\Page::createFromGuzzleResponse($request, $response, $this);
 
         // echo $res->getStatusCode();
         // echo $res->getHeaderLine('content-type');
@@ -43,13 +51,17 @@ class Surfer
 
     public function send($url, $params)
     {
-        $res = $this->client->request('POST', $url, [
-        
+        $request = $this->client->createRequest('POST', $url);
+
+        $history = new Guzzle\Plugin\History\HistoryPlugin();
+        $request->addSubscriber($history);
+
+        $response = $this->client->send($request, [
+
             'form_params' => $params,
-            'cookies' => $this->cookiesJar
         ]);
 
-        $this->lastPage = \codingtoys\Surfer\Page::createFromGuzzleResponse($res, $this);
+        $this->lastPage = \codingtoys\Surfer\Page::createFromGuzzleResponse($request, $response, $this);
 
         return $this->lastPage;
     }
