@@ -9,6 +9,7 @@
 namespace codingtoys\Surfer;
 
 use Guzzle\Http\Client;
+use Guzzle\Cookie\CookieJar;
 
 /**
  * A useful helper function for time calculations
@@ -24,7 +25,7 @@ class Surfer
 
     public function __construct()
     {
-        $this->cookiesJar = new \GuzzleHttp\Cookie\CookieJar;
+        $this->cookiesJar = new CookieJar;
         $this->client = new Client([
 
             'cookies' => $this->cookiesJar
